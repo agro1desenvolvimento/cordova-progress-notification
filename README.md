@@ -7,18 +7,20 @@ Cordova Plugin - Progress Notification for Android Plugin
 
 https://developer.android.com/training/notify-user/display-progress.html
 
-## Install
+## Installation
 ```bash
 cordova plugin add https://github.com/mateusnava/cordova-progress-notification
 ```
 
 ## How can I use?
-It's very simple, it's only 3 self-explanatory methods:
+It's very simple, there are 4 self-explanatory methods:
 
 ```javascript
 progressNotification.show(tittle, message, indeterminate);
 
 progressNotification.status(value); // value can be 0-100
 
-progressNotification.finish(message);
+progressNotification.finish(message, value); // Default parameter value for this method is 100
+
+progressNotification.dismiss(); // Close notification
 ```

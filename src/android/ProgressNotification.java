@@ -49,7 +49,9 @@ public class ProgressNotification extends CordovaPlugin {
             this.getBuilder()
                     .setContentTitle(title)
                     .setContentText(text)
-                    .setProgress(100, 0, indeterminate);
+                    .setProgress(100, 0, indeterminate)
+                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .setOngoing(true);
             this.updateOrShow();
 
             callbackContext.success();
@@ -59,7 +61,8 @@ public class ProgressNotification extends CordovaPlugin {
 
         if (action.equals("update")) {
             Integer value = args.getInt(0);
-            getBuilder().setProgress(100, value, indeterminate);
+            getBuilder()
+                .setProgress(100, value, indeterminate);
             this.updateOrShow();
 
             return true;
@@ -67,11 +70,21 @@ public class ProgressNotification extends CordovaPlugin {
 
         if (action.equals("finish")) {
             Integer value = args.getInt(1);
-            getBuilder().setContentText(args.getString(0)).setProgress(100, value, false);
+            getBuilder()
+                .setContentText(args.getString(0))
+                .setProgress(100, value, false)
+                .setOngoing(false);
             this.updateOrShow();
 
             return true;
         }
+
+        if (action.equals("dismiss")) {
+            this.getNotificationManager().cancel(NOTIFICATION_DEFAULT_ID);
+
+            return true;
+        }
+
 
         return false;
    }
