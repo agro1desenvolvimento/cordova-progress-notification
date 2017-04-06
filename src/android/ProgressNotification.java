@@ -2,6 +2,8 @@ package cordova.plugin;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.res.Resources;
+import android.os.Build;
 import android.support.v7.app.NotificationCompat;
 
 import org.apache.cordova.CallbackContext;
@@ -13,7 +15,8 @@ import inf.agro1.agrogestao.app.R;
 
 public class ProgressNotification extends CordovaPlugin {
     private static final String TAG = "progress-notification";
-    private static final Integer NOTIFICATION_DEFAULT_ID = 654;
+    private static final Integer NOTIFICATION_DEFAULT_ID = 6;
+    private static final Integer MAX_VALUE = 100;
 
     private NotificationManager notificationManager;
     private android.support.v4.app.NotificationCompat.Builder builder;
@@ -49,44 +52,54 @@ public class ProgressNotification extends CordovaPlugin {
             this.getBuilder()
                     .setContentTitle(title)
                     .setContentText(text)
-                    .setProgress(100, 0, indeterminate)
+                    .setProgress(MAX_VALUE, 0, indeterminate)
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .setSmallIcon(android.R.drawable.ic_menu_upload)
                     .setOngoing(true);
+
             this.updateOrShow();
 
             callbackContext.success();
-
-            return true;
         }
 
         if (action.equals("update")) {
             Integer value = args.getInt(0);
             getBuilder()
-                .setProgress(100, value, indeterminate);
+                .setProgress(MAX_VALUE, value, indeterminate);
             this.updateOrShow();
 
-            return true;
+            callbackContext.success();
         }
 
         if (action.equals("finish")) {
             Integer value = args.getInt(1);
             getBuilder()
                 .setContentText(args.getString(0))
-                .setProgress(100, value, false)
+                .setProgress(MAX_VALUE, value, false)
                 .setOngoing(false);
             this.updateOrShow();
+            this.builder = null;
 
-            return true;
+            callbackContext.success();
         }
 
         if (action.equals("dismiss")) {
             this.getNotificationManager().cancel(NOTIFICATION_DEFAULT_ID);
+            this.builder = null;
 
-            return true;
+            callbackContext.success();
         }
 
 
-        return false;
+        return true;
    }
 
+    @Override
+    public void onResume(boolean multitasking) {
+        super.onResume(multitasking);
+        if (this.builder != null) {
+            updateOrShow();
+        }
+
+    }
 }
