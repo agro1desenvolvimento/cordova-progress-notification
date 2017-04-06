@@ -66,7 +66,8 @@ public class ProgressNotification extends CordovaPlugin {
         }
 
         if (action.equals("finish")) {
-            getBuilder().setContentText(args.getString(0)).setProgress(100, 100, false);
+            Integer value = args.getInt(1);
+            getBuilder().setContentText(args.getString(0)).setProgress(100, value, false);
             this.updateOrShow();
 
             return true;

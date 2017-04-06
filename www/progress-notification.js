@@ -13,8 +13,9 @@ module.exports = (function() {
     exec(successCallback, errorCallback, 'ProgressNotification', 'update', [value]);
   }
 
-  _notification.finish = function(message, successCallback, errorCallback) {
-    exec(successCallback, errorCallback, 'ProgressNotification', 'finish', [message]);
+  _notification.finish = function(message, value, successCallback, errorCallback) {
+    value = typeof(value) == 'undefined' ? 100 : value;
+    exec(successCallback, errorCallback, 'ProgressNotification', 'finish', [message, value]);
   }
 
   return _notification;
