@@ -1,4 +1,4 @@
-package cordova.plugins;
+package cordova.plugin;
 
 import android.app.NotificationManager;
 import android.content.Context;
