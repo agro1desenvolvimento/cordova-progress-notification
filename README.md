@@ -7,6 +7,11 @@ Cordova Plugin - Progress Notification for Android Plugin
 
 https://developer.android.com/training/notify-user/display-progress.html
 
+## Install
+```bash
+cordova plugin add https://github.com/mateusnava/cordova-progress-notification
+```
+
 ## How can I use?
 It's very simple, it's only 3 self-explanatory methods:
 
