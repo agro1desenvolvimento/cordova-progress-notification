@@ -1,0 +1,19 @@
+{
+  "name": "cordova-progress-notification",
+  "version": "1.0.0",
+  "description": "Cordova Plugin - Progress Notification for Android Plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateusnava/cordova-progress-notification.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mateusnava/cordova-progress-notification/issues"
+  },
+  "homepage": "https://github.com/mateusnava/cordova-progress-notification#readme"
+}
