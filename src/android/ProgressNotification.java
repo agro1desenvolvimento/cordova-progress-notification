@@ -11,7 +11,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import inf.agro1.agrogestao.app.R;
+
 
 public class ProgressNotification extends CordovaPlugin {
     private static final String TAG = "progress-notification";
@@ -30,9 +30,13 @@ public class ProgressNotification extends CordovaPlugin {
         return this.notificationManager;
     }
 
+    private Integer getResource(String resource) {
+        return this.cordova.getActivity().getResources().getIdentifier(resource, "drawable", this.cordova.getActivity().getPackageName());
+    }
+
     private android.support.v4.app.NotificationCompat.Builder getBuilder() {
         if (this.builder == null) {
-            this.builder = new NotificationCompat.Builder(this.cordova.getActivity()).setSmallIcon(R.drawable.launcher_icon);
+            this.builder = new NotificationCompat.Builder(this.cordova.getActivity()).setSmallIcon(getResource("launcher_icon"));
         }
 
         return this.builder;
