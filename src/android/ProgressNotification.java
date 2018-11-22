@@ -2,16 +2,12 @@ package cordova.plugin;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.res.Resources;
-import android.os.Build;
 import android.support.v7.app.NotificationCompat;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
-
-
 
 public class ProgressNotification extends CordovaPlugin {
     private static final String TAG = "progress-notification";
@@ -36,7 +32,15 @@ public class ProgressNotification extends CordovaPlugin {
 
     private android.support.v4.app.NotificationCompat.Builder getBuilder() {
         if (this.builder == null) {
-            this.builder = new NotificationCompat.Builder(this.cordova.getActivity()).setSmallIcon(getResource("launcher_icon"));
+            String id = "Aqila_Atualizacao";
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                android.app.NotificationChannel channel = new android.app.NotificationChannel(id,
+                        id,
+                        NotificationManager.IMPORTANCE_DEFAULT);
+                getNotificationManager().createNotificationChannel(channel);
+            }
+
+            this.builder = new android.support.v4.app.NotificationCompat.Builder(this.cordova.getActivity(), id).setSmallIcon(getResource("launcher_icon"));
         }
 
         return this.builder;
