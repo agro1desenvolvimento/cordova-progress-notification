@@ -63,6 +63,7 @@ public class ProgressNotification extends CordovaPlugin {
                     .setProgress(MAX_VALUE, 0, indeterminate)
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                     .setSmallIcon(android.R.drawable.ic_menu_upload)
+                    .setOnlyAlertOnce(true)
                     .setOngoing(true);
 
             this.updateOrShow();
